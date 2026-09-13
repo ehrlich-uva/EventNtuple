@@ -1119,6 +1119,7 @@ namespace mu2e {
         for(const auto& sim : _pph->primarySimParticles()) {
           SimInfo info;
           _infoMCStructHelper.fillSimInfo(sim, info);
+          info.prirel = MCRelationship(sim, sim);
           info.index = _primaryInfos.size();
           _primaryInfos.emplace_back(info);
         }
