@@ -1619,10 +1619,14 @@ namespace mu2e {
           break;
         }
       }
-      if(kseed.hasCaloCluster() && fillCaloTrackMatchMC()) {
-        auto index = kseed.caloCluster().key();
-        auto const& ccmc = (*_ccmcch)[index];
-        _infoMCStructHelper.fillCaloClusterInfoMC(ccmc,_allMCTCHIs.at(i_trk_fit_branch));
+      if(fillCaloTrackMatchMC()) {
+        if(kseed.hasCaloCluster()) {
+          auto index = kseed.caloCluster().key();
+          auto const& ccmc = (*_ccmcch)[index];
+          _infoMCStructHelper.fillCaloClusterInfoMC(ccmc,_allMCTCHIs.at(i_trk_fit_branch));
+        } else { // no cluster --> no MC info, push back a default object to match the trkcalohit info list
+          _allMCTCHIs.at(i_trk_fit_branch).emplace_back(CaloClusterInfoMC());
+        }
       }
     }
   }
