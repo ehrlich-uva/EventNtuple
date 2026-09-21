@@ -121,6 +121,7 @@ Example: [PlotMCParentPosZ.C](./examples/PlotMCParentPosZ.C)
 The ```EventNtupleTimeCluster``` class contains all information related to a single time cluster
 
 * single objects: ```timecluster```
+* vectors: ```hits``` (only if the ```timeclustershits``` branch was written)
 
 ### The ```CaloCluster``` Class
 The ```CaloCluster``` class contains all information related to a single calorimeter cluster

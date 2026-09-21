@@ -89,6 +89,7 @@ namespace rooutil {
       CheckForBranch(ntuple, "trkhitcalibs", &this->trkhitcalibs);
 
       CheckForBranch(ntuple, "timeclusters", &this->timeclusters);
+      CheckForBranch(ntuple, "timeclustershits", &this->timeclustershits);
 
       CheckForBranch(ntuple, "caloclusters", &this->caloclusters);
       CheckForBranch(ntuple, "calohits", &this->calohits);
@@ -172,6 +173,7 @@ namespace rooutil {
         for (int i_cluster = 0; i_cluster < nTimeClusters(); ++i_cluster) {
           if (debug) { std::cout << "Event::Update(): Creating TimeCluster " << i_cluster << "... " << std::endl; }
           TimeCluster time_cluster(&(timeclusters->at(i_cluster))); // passing the addresses of the underlying structs
+          if (timeclustershits != nullptr) { time_cluster.hits = &(timeclustershits->at(i_cluster)); }
           time_clusters.emplace_back(time_cluster);
         }
       }
@@ -347,6 +349,7 @@ namespace rooutil {
         }
         for (int i_cluster = time_clusters_to_remove.size()-1; i_cluster >= 0; --i_cluster) {
           timeclusters->erase(timeclusters->begin()+time_clusters_to_remove[i_cluster]);
+          if (timeclustershits) { timeclustershits->erase(timeclustershits->begin()+time_clusters_to_remove[i_cluster]); }
         }
 
         time_clusters.erase(newEnd, time_clusters.end()); // remove only rearranges and returns the new end
@@ -443,6 +446,7 @@ namespace rooutil {
     std::vector<std::shared_ptr<UserBranchBase>> user_branches;
 
     std::vector<mu2e::EventNtupleTimeClusterInfo>* timeclusters = nullptr;
+    std::vector<std::vector<mu2e::EventNtupleComboHitInfo>>* timeclustershits = nullptr;
 
     std::vector<mu2e::CaloClusterInfo>* caloclusters = nullptr;
     std::vector<mu2e::CaloHitInfo>* calohits = nullptr;

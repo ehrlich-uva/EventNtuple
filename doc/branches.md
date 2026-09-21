@@ -90,6 +90,8 @@ The branch is empty if there are no time clusters during the event.
 |--------|-----------|-------------|------------------|
 | timeclusters |  Vector branch |   Information in a reconstructed time cluster| [see TimeClusterInfo.hh](../inc/TimeClusterInfo.hh)
 | lineseeds |  Vector branch |   Information in a reconstructed line seed (cosmic track seed)| [see LineSeedInfo.hh](../inc/LineSeedInfo.hh)
+| timeclustershits |  Vector-of-vector branch |   Basic information about a combo hit associated with a time cluster or a line seed| [see ComboHitInfo.hh](../inc/ComboHitInfo.hh)
+| lineseedshits |  Vector-of-vector branch |   Basic information about a combo hit associated with a time cluster or a line seed| [see ComboHitInfo.hh](../inc/ComboHitInfo.hh)
 ## Calorimeter Branches
 
 These branches are vectors of calorimeter clusters/hits/recodigis/digis that happened during the event.
